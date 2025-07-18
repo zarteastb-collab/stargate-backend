@@ -5,6 +5,6 @@ services:
     name: render-web-service
     env: node
     buildCommand: npm install
-    startCommand: node server.js
+    startCommand: node ./render-web-service/src/server.js
     envVars:
       NODE_ENV: production
