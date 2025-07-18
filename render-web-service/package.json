@@ -2,10 +2,10 @@
   "name": "render-web-service",
   "version": "1.0.0",
   "description": "A web service using Express",
-  "main": "src/server.js",
+  "main": "./render-web-service/src/server.js",
   "scripts": {
-    "start": "node src/server.js",
-    "dev": "nodemon src/server.js"
+    "start": "node ./render-web-service/src/server.js",
+    "dev": "nodemon ./render-web-service/src/server.js"
   },
   "dependencies": {
     "express": "^4.17.1"
