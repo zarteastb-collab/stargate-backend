@@ -1,0 +1,10 @@
+version: 1
+services:
+  web:
+    type: web
+    name: render-web-service
+    env: node
+    buildCommand: npm install
+    startCommand: node src/server.js
+    envVars:
+      NODE_ENV: production
