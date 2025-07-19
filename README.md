@@ -38,7 +38,7 @@ The server will start on `http://localhost:3000`.
 ### API Endpoints
 
 - **GET /**: Returns a welcome message.
-- Additional endpoints can be defined in `src/routes/index.js`.
+- Additional endpoints can be defined in `index.js`.
 
 ### Deployment
 
