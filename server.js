@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const routes = require('/workspaces/stargate-backend/index.js'); // Adjust the path as necessary
+const routes = require('~/index.js'); // Adjust the path as necessary
 
 const app = express();
 const PORT = process.env.PORT || 3000;

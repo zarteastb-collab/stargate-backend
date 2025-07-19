@@ -10,7 +10,7 @@
             "request": "launch",
             "name": "Run openai",
             "runtimeExecutable": "openai",
-            "cwd": ".vscode",
+            "cwd": "pwd",
             "args": []
         },
         {
@@ -20,7 +20,7 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "/workspaces/stargate-backend/.vscode/openai-test.js"
+            "program": "~/.vscode/openai-test.js"
         }
     ]
 }
