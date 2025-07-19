@@ -6,6 +6,6 @@ router.get('/', (_req, res) => {
     res.json({ message: 'Welcome to the Render Web Service!' });
 });
 
-// Define other routes here
+// Add more routes below as needed
 
 export default router;
