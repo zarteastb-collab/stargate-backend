@@ -11,10 +11,32 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
+            // Adjust the program path to point to your server entry file
+            // If your server entry file is named differently, change it accordingly
+            // For example, if your server file is named 'app.js', change it to '
+
             "program": "${workspaceFolder}/server.js",
+            "outFiles": [
+                "${workspaceFolder}/dist/**/*.js"
+            ],
+            // Set environment variables as needed
+            // Here, NODE_ENV is set to 'development' for local development
+            // You can add more environment variables as required
             "env": {
                 "NODE_ENV": "development"
-            }
+            },
         }
+
     ]
+    ]
+        // You can add more configurations here if needed
+    ]
+        // For example, you might want to add configurations for testing or debugging
+        // other parts of your application.
+        // Each configuration can have its own type, request, name, and other attributes.
+        // Make sure to adjust the paths and settings according to your project structure.
+        // For more information on how to configure launch.json, refer to the official documentation.
+        // https://code.visualstudio.com/docs/editor/debugging#_launchjson-attributes
+        // You can also use the 'Add Configuration...' button in the Debug view to add new
+        // configurations interactively.
 }
