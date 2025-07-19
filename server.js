@@ -1,5 +1,4 @@
 import express from 'express';
-import bodyParser from 'body-parser';
 import router from './index.js';
 
 const app = express();
