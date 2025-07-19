@@ -10,7 +10,7 @@
             "request": "launch",
             "name": "Run openai",
             "runtimeExecutable": "openai",
-            "cwd": "pwd",
+            "cwd": "${workspaceFolder}",
             "args": []
         },
         {
@@ -20,7 +20,7 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "./.vscode/openai-test.js"
+            "program": "openai-test.js"
         }
     ]
 }
