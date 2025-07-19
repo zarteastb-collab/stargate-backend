@@ -1,3 +1,18 @@
+   import { useRouter } from 'next/navigation';
+   import { useEffect } from 'react';
+
+   function MyComponent() {
+     const router = useRouter();
+
+     useEffect(() => {
+       // Router code here, e.g., router.push('/some-path')
+     }, []); // Empty dependency array to run only once after mount
+
+     return (
+       {/* ... component content ... */}
+     );
+   }
+
 import express from 'express';
 const app = express();
 const router = express.Router();
