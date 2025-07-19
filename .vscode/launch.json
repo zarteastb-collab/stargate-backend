@@ -13,11 +13,11 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Program",
+            "name": "Launch Server",
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "server.js",
+            "program": "${workspaceFolder}/server.js",
             "outFiles": [
                 "${workspaceFolder}/dist/**/*.js"
             ],
@@ -25,7 +25,6 @@
                 "NODE_ENV": "development"
             }
         },
- 
         {
             "name": "Attach by Process ID",
             "processId": "${command:PickProcess}",
@@ -44,8 +43,6 @@
             ],
             "type": "node"
         },
-
-
         {
             "args": [
                 "--extensionDevelopmentPath=${workspaceFolder}"
@@ -57,17 +54,6 @@
             "preLaunchTask": "npm",
             "request": "launch",
             "type": "extensionHost"
-        },
-
-
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Launch Program",
-            "skipFiles": [
-                "<node_internals>/**"
-            ],
-            "program": "index.js"
         }
     ]
 }

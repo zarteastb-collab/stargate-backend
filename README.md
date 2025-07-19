@@ -1,6 +1,6 @@
-# Render Web Service
+# Stargate Backend
 
-This project is a simple web service built with Node.js and Express. It serves as a template for creating RESTful APIs.
+This project is a simple web service built with Node.js and Express. It serves as a template for creating RESTful APIs and is ready for deployment on Render.
 
 ## Getting Started
 
@@ -18,7 +18,7 @@ This project is a simple web service built with Node.js and Express. It serves a
 
 2. Navigate to the project directory:
    ```
-   cd render-web-service
+   cd stargate-backend
    ```
 
 3. Install the dependencies:
@@ -28,7 +28,7 @@ This project is a simple web service built with Node.js and Express. It serves a
 
 ### Running the Service
 
-To start the web service, run the following command:
+To start the web service, run:
 ```
 npm start
 ```
@@ -37,17 +37,17 @@ The server will start on `http://localhost:3000`.
 
 ### API Endpoints
 
-- **GET /**: Returns a welcome message.
+- **GET /api/**: Returns a welcome message.
 - Additional endpoints can be defined in `index.js`.
 
 ### Deployment
 
-This project is configured to be deployed on Render. Ensure that the `.render.yaml` file is properly set up with the necessary environment variables and commands.
+This project is configured for deployment on Render. Ensure that the `.render.yaml` file is properly set up with the necessary environment variables and commands.
 
 ### Contributing
 
 Feel free to submit issues or pull requests for improvements or bug fixes.
 
-### License
+## License
 
 This project is licensed under the MIT License.

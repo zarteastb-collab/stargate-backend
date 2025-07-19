@@ -1,9 +1,9 @@
 version: 1
 services:
-  web:
-    type: web
-    name: "stargate-backend"
+- type: web
+  name: stargate-backend
   buildCommand: npm install
   startCommand: node server.js
   envVars:
-    NODE_ENV: production
+    - key: NODE_ENV
+      value: production

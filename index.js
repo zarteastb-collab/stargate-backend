@@ -8,6 +8,4 @@ router.get('/', (_req, res) => {
 
 // Define other routes here
 
-export default (app) => {
-    app.use('/api', router);
-};
+export default router;
