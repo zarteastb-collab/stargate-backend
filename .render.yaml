@@ -29,7 +29,7 @@ services:
     cache-dependency-path: # optional
           
     buildCommand: npm install
-    startCommand: node src/server.js
+    startCommand: node server.js
     envVars:
       NODE_ENV: production
 
