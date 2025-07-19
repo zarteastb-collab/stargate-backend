@@ -2,7 +2,7 @@ version: 1
 services:
   web:
     type: web
-    name: render-web-service
+    name: "${workspaceFolder}"
     env: node
                 - name: Setup Node.js environment
   uses: actions/setup-node@v3.9.1
