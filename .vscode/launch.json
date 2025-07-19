@@ -20,7 +20,7 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "~/.vscode/openai-test.js"
+            "program": "./.vscode/openai-test.js"
         }
     ]
 }
