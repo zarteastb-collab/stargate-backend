@@ -1,8 +1,8 @@
 {
-  "name": "${workspaceFolder}",
+  "name": "stargate-backend",
   "version": "1.0.0",
   "description": "",
-  "main": "node_modules/openai/index.js",
+  "main": "src/routes/index.js",
   "scripts": {
     "start": "node src/server.js",
     "dev": "nodemon src/server.js"

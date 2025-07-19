@@ -10,7 +10,7 @@
             "request": "launch",
             "name": "Run openai",
             "runtimeExecutable": "openai",
-            "cwd": "${workspaceFolder}",
+            "cwd": ".vscode",
             "args": []
         },
         {
