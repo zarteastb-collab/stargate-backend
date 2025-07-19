@@ -4,15 +4,6 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Run openai",
-            "runtimeExecutable": "openai",
-            "cwd": "${workspaceFolder}",
-            "args": []
-        },
         {
             "type": "node",
             "request": "launch",
@@ -20,7 +11,7 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "openai-test.js"
+            "program": "server.js"
         }
     ]
 }
