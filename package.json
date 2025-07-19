@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js"
+    "start": "node ./../stargate-backend/server.js",
+    "dev": "nodemon ./../stargate-backend/server.js"
   },
   "dependencies": {
     "express": "^4.17.1"

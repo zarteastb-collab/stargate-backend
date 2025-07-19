@@ -20,7 +20,7 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "openai-test.js"
+            "program": "./../stargate-backend/.vscode/openai-test.js"
         }
     ]
 }
