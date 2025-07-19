@@ -2,10 +2,10 @@
   "name": "stargate-backend",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "$home/server.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js"
+    "start": "node $home/server.js",
+    "dev": "nodemon $home/server.js"
   },
   "dependencies": {
     "express": "^4.17.1"
