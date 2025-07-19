@@ -1,5 +1,5 @@
 import express from 'express';
-
+export default router;
 const app = express();
 
 app.get('/', (_req, res) => {
