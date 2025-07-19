@@ -1,6 +1,9 @@
 import express from 'express';
-export default router;
 const app = express();
+const router = express.Router();
+router.get('/', (_req, res) => {
+    res.json({ message: 'Welcome to the Render Web Service!' });
+export default router;
 
 app.get('/', (_req, res) => {
     res.json({ message: 'Welcome to the Render Web Service!' });
