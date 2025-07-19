@@ -46,7 +46,7 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "$home/index.js"
+            "program": "index.js"
         }
     ]
 }
