@@ -1,11 +1,14 @@
 import express from 'express';
 
-const router = express.Router();
+const app = express();
 
-router.get('/', (_req, res) => {
+app.get('/', (_req, res) => {
     res.json({ message: 'Welcome to the Render Web Service!' });
 });
 
 // Add more routes below as needed
 
-export default router;
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
