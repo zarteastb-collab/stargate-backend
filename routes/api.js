@@ -1,7 +1,6 @@
 // routes/api.js
 
 import { Router } from 'express';
-// Ensure this line correctly imports from googleai.js
 import genAI from '../services/googleai.js';
 
 const router = Router();
@@ -13,11 +12,15 @@ router.post('/chat', async (req, res) => {
       return res.status(400).json({ error: 'Message is required' });
     }
 
+    // Select the Gemini model
     const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
+
+    // Send the user's message to the model
     const result = await model.generateContent(message);
     const response = await result.response;
     const text = response.text();
 
+    // Send the model's response back to the client
     res.json({ response: text });
 
   } catch (error) {

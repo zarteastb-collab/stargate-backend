@@ -16,7 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Root endpoint
 app.get('/', (_req, res) => {
-  res.json({ message: 'Welcome to the Stargate Backend API!' });
+  res.json({ message: 'Welcome to the Google AI Backend API!' });
 });
 
 // API routes

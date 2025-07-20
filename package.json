@@ -1,7 +1,7 @@
 {
   "name": "stargate-backend",
   "version": "1.0.0",
-  "description": "A simple Express backend using OpenAI, ready for deployment on Render.",
+  "description": "A simple Express backend using Google AI, ready for deployment.",
   "main": "server.js",
   "type": "module",
   "scripts": {
@@ -12,7 +12,7 @@
   "author": "Brett Anthony Dixon",
   "license": "MIT",
   "dependencies": {
-    "@google/generative-ai": "^0.24.1",
+    "@google/generative-ai": "^0.14.1",
     "dotenv": "^16.4.5",
     "express": "^4.19.2"
   },
