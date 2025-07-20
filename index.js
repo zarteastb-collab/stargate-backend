@@ -57,24 +57,13 @@ import session from 'express-session';
 // Import the createServer function from kafka-server to create a Kafka server
 // Import the createServer function from activemq-server to create an ActiveMQ server
 // Import the createServer function from nats-server to create a NATS server
-import { createServer as createSocketIOServer } from 'socket.io-server';
-// Import the createServer function from socket.io-server to create a Socket.IO server
-import { createServer as createWebRTCSignalingServer } from 'webrtc-signaling-server';
-// Import the createServer function from webrtc-signaling-server to create a WebRTC signaling server
-// Import the createServer function from graphql-subscriptions-server to create a GraphQL subscriptions server
-// Import the createServer function from rest-api-server to create a REST API server
-// Import the createServer function from openapi-server to create an OpenAPI server
-// Import the createServer function from swagger-ui-server to create a Swagger UI server
-// Import the createServer function from api-documentation-server to create an API documentation server
-export app = express();
-// Create an instance of express to handle HTTP requests
 app.use(cors());
 // Use the cors middleware to enable Cross-Origin Resource Sharing
 app.use(helmet());
 // Use the helmet middleware to secure HTTP headers
 app.use(morgan('combined'));
 // Use the morgan middleware to log HTTP requests
-app.use(compression());   
+app.use(compression());
 // Create an instance of express
 // Create a router instance to handle routes
 
@@ -115,7 +104,7 @@ app.use('/api', router);
 // Use the router for handling routes
 // Example route for handling API requests
 // Add more routes below as needed
-const app; = express();
+const app = express();
 // Create an instance of express to handle HTTP requests
 // Create a router instance to handle routes
 // Use the express.Router() to create a new router instance
