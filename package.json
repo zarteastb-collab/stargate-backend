@@ -24,8 +24,19 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "build": " src -d dist",
-    "prebuild": "rimraf dist",
+    "build": " src -d ${workspaceFolder}/dist && echo 'Build completed!' && npm run postbuild  && npm run postinstall",
+    "clean": "rimraf ${workspaceFolder}/dist",
+    "prebuild": "npm run clean",
+    "postbuild": "echo 'Build completed!'",
+    "prepublishOnly": "npm run build",
+    "prepack": "npm run build",
+    "postpack": "echo 'Package created!'",
+    "preversion": "npm run lint && npm run test",
+    "version": "npm run build && git add ${workspaceFolder}/dist && git commit -m 'chore: update ${workspaceFolder}/dist files' && git tag -a v$npm_package_version -m 'Release v$npm_package_version'",
+    "postversion": "echo 'Version $npm_package_version released!' && git push && git push --tags",
+    "prepublish": "npm run build",
+  
+    "prebuild": "rimraf ${workspaceFolder}/dist && mkdir -p ${workspaceFolder}/dist && echo 'Build directory cleaned!'",
     "postbuild": "echo 'Build completed!'",
     "precommit": "npm run lint && npm run format",
     "prepush": "npm run lint && npm run test",
@@ -86,7 +97,7 @@
     "postinstall": "npm run build",
     "predev": "npm run build",
     "dev": "nodemon server.js",
-    "start:prod": "node dist/server.js"
+    "start:prod": "node server.js"
   },
   "dependencies": {
     "body-parser": "^1.20.2",

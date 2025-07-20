@@ -27,8 +27,7 @@ app.use(express.urlencoded({ extended: true }));
 // This is useful for handling form submissions and other URL-encoded data
 // The express.urlencoded() middleware parses incoming requests with URL-encoded payloads
 // The 'extended' option allows for rich objects and arrays to be encoded into the URL-
-
-encoded format
+// encoded format, allowing for more complex data structures
 // Use the router defined in index.js for handling routes
 // This router will contain all the route definitions for your application
 // It allows you to organize your routes in a modular way
