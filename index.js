@@ -66,7 +66,7 @@ import { createServer as createWebRTCSignalingServer } from 'webrtc-signaling-se
 // Import the createServer function from openapi-server to create an OpenAPI server
 // Import the createServer function from swagger-ui-server to create a Swagger UI server
 // Import the createServer function from api-documentation-server to create an API documentation server
-const app = express();
+export app = express();
 // Create an instance of express to handle HTTP requests
 app.use(cors());
 // Use the cors middleware to enable Cross-Origin Resource Sharing
