@@ -1,6 +1,6 @@
 {
   "name": "stargate-backend",
-  "private": true,
+  "private": false,
   "repository": {
     "type": "git",
     "url": ""
