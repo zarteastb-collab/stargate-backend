@@ -59,8 +59,7 @@ import session from 'express-session';
 // Import the createServer function from nats-server to create a NATS server
 import { createServer as createSocketIOServer } from 'socket.io-server';
 // Import the createServer function from socket.io-server to create a Socket.IO server
-import { createServer as createWebRTCSignalingServer } from 'webrtc-signaling-server
-
+import { createServer as createWebRTCSignalingServer } from 'webrtc-signaling-server';
 // Import the createServer function from webrtc-signaling-server to create a WebRTC signaling server
 // Import the createServer function from graphql-subscriptions-server to create a GraphQL subscriptions server
 // Import the createServer function from rest-api-server to create a REST API server
@@ -93,7 +92,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Middleware to parse cookies
 app.use(cookieParser());
 // Use the cookieParser middleware to parse cookies in requests
-app.use(session({secret});
+app.use(session({secret}));
 // Import the router from the routes file
 // Middleware to parse JSON bodies
 app.use(express.json());
@@ -116,7 +115,19 @@ app.use('/api', router);
 // Use the router for handling routes
 // Example route for handling API requests
 // Add more routes below as needed
-export app;
+const app; = express();
+// Create an instance of express to handle HTTP requests
+// Create a router instance to handle routes
+// Use the express.Router() to create a new router instance
+// Middleware to parse JSON bodies
+// Use the express.json() middleware to parse JSON bodies
+// Middleware to parse URL-encoded bodies
+// Use the express.urlencoded() middleware to parse URL-encoded bodies
+// Middleware to parse cookies
+// Use the cookieParser middleware to parse cookies in requests
+// Middleware to handle sessions
+app.use(session({secret}));
+// Use the session middleware to handle sessions, with a specified  
 // Export the app instance for use in other files
 // Import the router from the routes file
 // Use the router for handling routes
