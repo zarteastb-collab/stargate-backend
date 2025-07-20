@@ -136,7 +136,7 @@
     "prepack": "npm run build",
     "postpack": "echo 'Package created!'",
     "preversion": "npm run lint && npm run test",
-    "version": "npm run build && git add ${workspaceFolder}/dist && git commit -m 'chore: update ${workspaceFolder}/dist files' && git tag -a v$npm_package_version -m 'Release v$npm_package_version'",
+    "version": "npm run build && git add dist && git commit -m 'chore: update dist files' && git tag -a v$npm_package_version -m 'Release v$npm_package_version'",
     "postversion": "echo 'Version $npm_package_version released!' && git push && git push --tags",
     "prepublish": "npm run build",
     "postpublish": "echo 'Package published!'",
