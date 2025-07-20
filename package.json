@@ -245,21 +245,6 @@
     "backend",
     "render",
     "nodejs"
-  ],
-  "homepage": "{
-    "name": "name",
-    "description": "description",
-    "authors": "author",
-    "version": "1.0.0",
-    "main": "pathToMain",
-    "dependencies": {}
-    "keywords": [
-      "express",
-      "backend",
-      "render",
-      "nodejs"
-    "license": "ISC"
-  },
     ]",
   }
   "repository": {
@@ -267,8 +252,7 @@
     "url": "git+",
     "url": "git+",
   "engines": {
-    "node": ">=14.0.0"
-  },
+    "node": ">=14.0.0"},
   "type": "module",
   "scripts": {
     "start": "node server.js",
