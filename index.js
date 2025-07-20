@@ -1,8 +1,7 @@
-   import { useRouter } from 'next/navigation';
-   import { useEffect } from 'react';
-    // Example component using useRouter
-
-
+// index.js
+// This is the main entry point for the Render Web Service
+// It sets up the server, middleware, and routes for the application
+// Import necessary modules and libraries 
 import express from 'express';
 // Import the express module to create the server
 import cors from 'cors';
@@ -14,7 +13,6 @@ import morgan from 'morgan';
 import compression from 'compression';
 // Import the compression module to compress HTTP responses
 
-import rateLimit from 'express-rate-limit';
 // Import the express-rate-limit module to limit repeated requests
 import bodyParser from 'body-parser';
 // Import the body-parser module to parse incoming request bodies
@@ -22,93 +20,52 @@ import cookieParser from 'cookie-parser';
 // Import the cookie-parser module to parse cookies in requests
 import session from 'express-session';
 // Import the express-session module to handle sessions
-import passport from 'passport';
 // Import the passport module for authentication
-import flash from 'connect-flash';
 // Import the connect-flash module for flash messages
-import { graphqlHTTP } from 'express-graphql';
 // Import the express-graphql module to handle GraphQL requests
-import { buildSchema } from 'graphql';
 // Import the buildSchema function from graphql to create GraphQL schemas
-import { ApolloServer } from 'apollo-server-express';
 // Import the ApolloServer class from apollo-server-express to handle GraphQL requests
-import { createServer } from 'http';
 // Import the createServer function from http to create an HTTP server
-import { Server } from 'socket.io';
 // Import the Server class from socket
 
-import { createClient } from 'redis';
 // Import the createClient function from redis to connect to a Redis server
-import { MongoClient } from 'mongodb';
 // Import the MongoClient class from mongodb to connect to a MongoDB server
-import { Client } from 'pg';
 // Import the Client class from pg to connect to a PostgreSQL server
-import { Sequelize } from 'sequelize';
 // Import the Sequelize class from sequelize to connect to a SQL database
-import { createConnection } from 'mysql2';
 // Import the createConnection function from mysql2 to connect to a MySQL server
-import { createClient as createCassandraClient } from 'cassandra-driver';
 // Import the createClient function from cassandra-driver to connect to a Cassandra server
-import { Client as ElasticClient } from '@elastic/elasticsearch';
 // Import the Client class from @elastic/elasticsearch to connect to an Elasticsearch server
-import { Kafka } from 'kafkajs';
 // Import the Kafka class from kafkajs to connect to a Kafka server
-import { connect as connectRabbitMQ } from 'amqplib';
 // Import the connect function from amqplib to connect to a RabbitMQ server
-import { connect as connectNATS } from 'nats';
 // Import the connect function from nats to connect to a NATS server
-import { createServer as createWebSocketServer } from 'ws';
 // Import the createServer function from ws to create a WebSocket server
-import { createServer as createHTTPSServer } from 'https';
 // Import the createServer function from https to create an HTTPS server
-import { createServer as createGraphQLServer } from 'graphql-yoga';
 // Import the createServer function from graphql-yoga to create a GraphQL server
-import { createServer as createSocketIOServer } from 'socket.io';
 // Import the createServer function from socket.io to create a Socket.IO server
-import { createServer as createWebRTCServer } from 'wrtc';
 // Import the createServer function from wrtc to create a WebRTC server
-import { createServer as createGRPCServer } from '@grpc/grpc-js';
 // Import the createServer function from @grpc/grpc-js to create a gRPC server
-import { createServer as createMQTTServer } from 'mqtt';
 // Import the createServer function from mqtt to create an MQTT server
-import { createServer as createRedisServer } from 'redis-server';
 // Import the createServer function from redis-server to create a Redis server
-import { createServer as createMongoDBServer } from 'mongodb-server';
 // Import the createServer function from mongodb-server to create a MongoDB server
-import { createServer as createPostgreSQLServer } from 'postgresql-server';
 // Import the createServer function from postgresql-server to create a PostgreSQL server
-import { createServer as createMySQLServer } from 'mysql-server';
 // Import the createServer function from mysql-server to create a MySQL server
-import { createServer as createSQLiteServer } from 'sqlite-server';
 // Import the createServer function from sqlite-server to create a SQLite server
-import { createServer as createCassandraServer } from 'cassandra-server';
 // Import the createServer function from cassandra-server to create a Cassandra server
-import { createServer as createElasticsearchServer } from 'elasticsearch-server';
 // Import the createServer function from elasticsearch-server to create an Elasticsearch server
-import { createServer as createRedisPubSubServer } from 'redis-pubsub-server';
 // Import the createServer function from redis-pubsub-server to create a Redis Pub/Sub server
-import { createServer as createRabbitMQServer } from 'rabbitmq-server';
 // Import the createServer function from rabbitmq-server to create a RabbitMQ server
-import { createServer as createKafkaServer } from 'kafka-server';
 // Import the createServer function from kafka-server to create a Kafka server
-import { createServer as createActiveMQServer } from 'activemq-server';
 // Import the createServer function from activemq-server to create an ActiveMQ server
-import { createServer as createNATSServer } from 'nats-server';
 // Import the createServer function from nats-server to create a NATS server
 import { createServer as createSocketIOServer } from 'socket.io-server';
 // Import the createServer function from socket.io-server to create a Socket.IO server
 import { createServer as createWebRTCSignalingServer } from 'webrtc-signaling-server
 
 // Import the createServer function from webrtc-signaling-server to create a WebRTC signaling server
-import { createServer as createGraphQLSubscriptionsServer } from 'graphql-subscriptions-server';
 // Import the createServer function from graphql-subscriptions-server to create a GraphQL subscriptions server
-import { createServer as createRESTAPIServer } from 'rest-api-server';
 // Import the createServer function from rest-api-server to create a REST API server
-import { createServer as createOpenAPIServer } from 'openapi-server';
 // Import the createServer function from openapi-server to create an OpenAPI server
-import { createServer as createSwaggerUIServer } from 'swagger-ui-server';
 // Import the createServer function from swagger-ui-server to create a Swagger UI server
-import { createServer as createAPIDocumentationServer } from 'api-documentation-server';
 // Import the createServer function from api-documentation-server to create an API documentation server
 const app = express();
 // Create an instance of express to handle HTTP requests
