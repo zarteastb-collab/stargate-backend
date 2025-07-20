@@ -1,4 +1,12 @@
 import express from 'express';
+import bodyParser from 'body-parser';
+// Import the body-parser module to parse incoming request bodies
+import cookieParser from 'cookie-parser';
+// Import the cookie-parser module to parse cookies in requests
+import session from 'express-session';
+const app = cookieParser();
+
+const app = session();
 
 import router from './index.js';
 // server.js - Main entry point for the Express application

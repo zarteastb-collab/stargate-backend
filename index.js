@@ -1,18 +1,9 @@
 // index.js
 // This is the main entry point for the Render Web Service
 // It sets up the server, middleware, and routes for the application
+"type" ; "module";
 // Import necessary modules and libraries 
 import express from 'express';
-// Import the express module to create the server
-import cors from 'cors';
-// Import the cors module to handle Cross-Origin Resource Sharing
-import helmet from 'helmet';
-// Import the helmet module to secure HTTP headers
-import morgan from 'morgan';
-// Import the morgan module for logging HTTP requests
-import compression from 'compression';
-// Import the compression module to compress HTTP responses
-
 // Import the express-rate-limit module to limit repeated requests
 import bodyParser from 'body-parser';
 // Import the body-parser module to parse incoming request bodies
@@ -57,15 +48,7 @@ import session from 'express-session';
 // Import the createServer function from kafka-server to create a Kafka server
 // Import the createServer function from activemq-server to create an ActiveMQ server
 // Import the createServer function from nats-server to create a NATS server
-app.use(cors());
-// Use the cors middleware to enable Cross-Origin Resource Sharing
-app.use(helmet());
-// Use the helmet middleware to secure HTTP headers
-app.use(morgan('combined'));
-// Use the morgan middleware to log HTTP requests
-app.use(compression());
-// Create an instance of express
-// Create a router instance to handle routes
+
 
 const router = express.Router();
 // Create a router instance to handle routes
@@ -93,7 +76,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // Import the router from the routes file
 // Use the router for handling routes
-import router from './routes.js';
+//import router from './routes.js';
 
 // Define a simple route
 app.get('/', (_req, res) => {
