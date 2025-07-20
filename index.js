@@ -1,15 +1,23 @@
 // index.js
+
+/**
+ * Module exports.
+ * @public
+ */
+"type" = "module";
+exports.parse = parse;
+exports.serialize = serialize;
+export default openai;
+
 // This is the main entry point for the Render Web Service
 // It sets up the server, middleware, and routes for the application
-"type" ; "module";
 // Import necessary modules and libraries 
-import express from 'express';
+import express from 'express/index.js';
 // Import the express-rate-limit module to limit repeated requests
-import bodyParser from 'body-parser';
 // Import the body-parser module to parse incoming request bodies
-import cookieParser from 'cookie-parser';
+
 // Import the cookie-parser module to parse cookies in requests
-import session from 'express-session';
+import session from 'express/index.js';
 // Import the express-session module to handle sessions
 // Import the passport module for authentication
 // Import the connect-flash module for flash messages
@@ -49,19 +57,14 @@ import session from 'express-session';
 // Import the createServer function from activemq-server to create an ActiveMQ server
 // Import the createServer function from nats-server to create a NATS server
 
+import cookieParser, { parse, serialize } from 'cookie/index.js';
 
 const router = express.Router();
 // Create a router instance to handle routes
 // Use the express.Router() to create a new router instance
 // Middleware to parse JSON bodies
 // Use the express.json() middleware to parse JSON bodies
-app.use(bodyParser.json());
-// Use the bodyParser.json() middleware to parse JSON bodies
-// Middleware to parse URL-encoded bodies
-// Use the express.urlencoded() middleware to parse URL-encoded bodies
-app.use(bodyParser.urlencoded({ extended: true }));
-// Use the bodyParser.urlencoded() middleware to parse URL-encoded bodies
-// Middleware to parse cookies
+
 app.use(cookieParser());
 // Use the cookieParser middleware to parse cookies in requests
 app.use(session({secret}));
