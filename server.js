@@ -15,8 +15,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Root endpoint
+// server.js
+
 app.get('/', (_req, res) => {
-  res.json({ message: 'Welcome to the Google AI Backend API!' });
+  res.json({ greeting: 'Server is running successfully.' });
 });
 
 // API routes
