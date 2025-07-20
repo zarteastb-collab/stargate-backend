@@ -21,7 +21,12 @@ router.post('/chat', async (req, res) => {
     const text = response.text();
 
     // Send the model's response back to the client
-    res.json({ response: text });
+
+// Send a differently structured response
+res.json({
+  ai_reply: text,
+  timestamp: new Date().toISOString()
+});
 
   } catch (error) {
     console.error('Error with Google AI API:', error);
