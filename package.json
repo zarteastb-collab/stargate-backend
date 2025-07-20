@@ -1,5 +1,109 @@
 {
   "name": "stargate-backend",
+  "displayName": "Stargate Backend",
+  "publisher": "brettanthonydixon",
+  "license": "ISC",
+  "licenseText": "ISC License",
+  "icon": "icon.png",
+  "engines": {
+    "vscode": "^1.60.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:stargate-backend.start",
+    "onCommand:stargate-backend.stop",
+    "onCommand:stargate-backend.restart",
+    "onCommand:stargate-backend.deploy",
+    "onCommand:stargate-backend.build",
+    "onCommand:stargate-backend.clean",
+    "onCommand:stargate-backend.format",
+    "onCommand:stargate-backend.lint",
+    "onCommand:stargate-backend.test",
+    "onCommand:stargate-backend.version",
+    "onCommand:stargate-backend.publish",
+    "onCommand:stargate-backend.update",
+    "onCommand:stargate-backend.upgrade",
+    "onCommand:stargate-backend.check",
+    "onCommand:stargate-backend.checkup",
+    "onCommand:stargate-backend.checkdown",
+    "onCommand:stargate-backend.checkin",
+    "onCommand:stargate-backend.checkout",
+    "onCommand:stargate-backend.commit",
+    "onCommand:stargate-backend.push",
+    "onCommand:stargate-backend.pull",
+    "onCommand:stargate-backend.clone",
+    "onCommand:stargate-backend.install",
+    "onCommand:stargate-backend.uninstall",
+    "onCommand:stargate-backend.updateDependencies",
+    "onCommand:stargate-backend.upgradeDependencies",
+    "onCommand:stargate-backend.checkDependencies",
+    "onCommand:stargate-backend.checkupDependencies",
+    "onCommand:stargate-backend.checkdownDependencies",
+    "onCommand:stargate-backend.checkinDependencies",
+    "onCommand:stargate-backend.checkoutDependencies",
+    "onCommand:stargate-backend.commitDependencies",
+    "onCommand:stargate-backend.pushDependencies",
+    "onCommand:stargate-backend.pullDependencies",
+    "onCommand:stargate-backend.cloneDependencies",
+    "onCommand:stargate-backend.installDependencies",
+    "onCommand:stargate-backend.uninstallDependencies",
+    "onCommand:stargate-backend.updateDevDependencies",
+    "onCommand:stargate-backend.upgradeDevDependencies",
+    "onCommand:stargate-backend.checkDevDependencies",
+    "onCommand:stargate-backend.checkupDevDependencies",
+    "onCommand:stargate-backend.checkdownDevDependencies",
+    "onCommand:stargate-backend.checkinDevDependencies",
+    "onCommand:stargate-backend.checkoutDevDependencies",
+    "onCommand:stargate-backend.commitDevDependencies",
+    "onCommand:stargate-backend.pushDevDependencies",
+    "onCommand:stargate-backend.pullDevDependencies",
+    "onCommand:stargate-backend.cloneDevDependencies",
+    "onCommand:stargate-backend.installDevDependencies",
+    "onCommand:stargate-backend.uninstallDevDependencies"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "stargate-backend.start",
+        "title": "Start Stargate Backend",
+        "category": "Stargate Backend"
+      },
+      {
+        "command": "stargate-backend.stop",
+        "title": "Stop Stargate Backend",
+        "category": "Stargate Backend"
+      },
+      {
+        "command": "stargate-backend.restart",
+        "title": "Restart Stargate Backend",
+        "category": "Stargate Backend"
+      },
+      {
+        "command": "stargate-backend.deploy",
+        "title": "Deploy Stargate Backend",
+        "category": "Stargate Backend"
+      },
+      {
+        "command": "stargate-backend.build",
+        "title": "Build Stargate Backend",
+        "category": "Stargate Backend"
+      },
+      {
+        "command": "stargate-backend.clean",
+        "title": "Clean Stargate Backend",
+        "category": "Stargate Backend"
+      },
+      {
+        "command": "stargate-backend.format",
+        "title": "Format Stargate Backend",
+        "category": "Stargate Backend"
+      },
+      {
+        "command": "stargate-backend.lint",
+        "title": "Lint Stargate Backend",
+        "category": "Stargate Backend",      
   "private": false,
   "version": "1.0.0",
   "description": "A simple Express backend ready for deployment on Render.",
@@ -14,7 +118,7 @@
   "type": "module",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "stargate-backend.git"
   },
   "engines": {
     "node": ">=14.0.0"
@@ -108,8 +212,7 @@
     "prettier:lint:format:check:fix": "prettier --check . && eslint",
     "prettier:write:format:check:fix": "prettier --write . && eslint",
     "prettier:fix:format:check:lint": "prettier --write . && eslint",
-  
-        "prestart": "npm run build",
+    "prestart": "npm run build",
     "predev": "npm run build",
     "dev": "nodemon server.js",
     "start:prod": "node server.js"
@@ -153,6 +256,4 @@
     "eslint-plugin-ava": "^4.0.0",
     "eslint-plugin-jest-dom": "^4.0.0"
   },
-  "author": "brettanthonydixon",
-  "license": "ISC"
 }

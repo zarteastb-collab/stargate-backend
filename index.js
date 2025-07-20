@@ -53,13 +53,7 @@
        <h1>My Component</h1>
        <p>This component uses useRouter to navigate programmatically.</p>
        <button onClick={() => router.push('/another-page')}>Go to Another Page</button>
-     </div>
-      // You can add more content or functionality as needed
-       {return (       <div> 
-         <h1>My Component</h1>
-         <p>This component uses useRouter to navigate programmatically.</p>
-         <button onClick={() => router.push('/another-page')}>Go to Another Page</button>
-     );
+     </div> );
    }
 
 
