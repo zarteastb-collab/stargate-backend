@@ -44,7 +44,6 @@
     <script src="/node_modules/sortablejs/Sortable.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', async () => {
-            // ... (Auth logic remains the same)
             const authScreen = document.getElementById('auth-screen');
             const gridContainer = document.getElementById('grid-container');
 
@@ -69,18 +68,29 @@
 
         function initializeApp(user) {
             renderUserProfile(user);
+
             Split(['#left-col', '#center-col', '#right-col'], { sizes: [25, 50, 25], minSize: 200 });
             Split(['#pane-3', '#pane-6', '#pane-7'], { direction: 'vertical', sizes: [40, 30, 30], minSize: 60 });
             Split(['#pane-4', '#pane-8', '#pane-0'], { direction: 'vertical', sizes: [15, 70, 15], minSize: 60 });
             Split(['#pane-5', '#pane-1', '#pane-2'], { direction: 'vertical', sizes: [33, 34, 33], minSize: 60 });
+            
             document.querySelectorAll('.drop-zone').forEach(zone => {
                 new Sortable(zone, { group: 'shared', animation: 150, handle: '.component-header', ghostClass: 'blue-background-ghost' });
             });
+
             setupChat();
             setupSettings();
         }
         
-        function renderUserProfile(user) { /* ... (This function remains the same) ... */ }
+        function renderUserProfile(user) {
+            document.getElementById('user-profile-content').innerHTML = `
+                <div class="user-profile-widget">
+                    <img src="${user.photo}" alt="User Avatar">
+                    <strong>${user.name}</strong>
+                    <span>${user.email}</span>
+                    <a href="/logout">Logout</a>
+                </div>`;
+        }
         
         function setupSettings() {
             const settingsModal = document.getElementById('settings-modal');
@@ -94,14 +104,57 @@
             openBtn.addEventListener('click', () => settingsModal.style.display = 'flex');
             closeBtn.addEventListener('click', () => settingsModal.style.display = 'none');
             
-            // --- THE FIX IS HERE ---
-            // Removed the incorrect backslashes (\) from the template literal
             fontSizeInput.addEventListener('input', (e) => gridContainer.style.fontSize = `${e.target.value}px`);
-            
             colorInput.addEventListener('input', (e) => gridContainer.style.color = e.target.value);
+
             spinToggle.addEventListener('change', (e) => {
                 document.querySelector('#pane-3 .component-header').classList.toggle('icon-spin', e.target.checked);
             });
         }
 
-        function setup
+        // --- FULLY IMPLEMENTED CHAT FUNCTIONALITY ---
+        function setupChat() {
+            const chatForm = document.getElementById('chat-form');
+            const chatInput = document.getElementById('chat-input');
+            const messageArea = document.getElementById('message-area');
+
+            chatForm.addEventListener('submit', async (event) => {
+                event.preventDefault();
+                const userMessage = chatInput.value.trim();
+                if (!userMessage) return;
+
+                addMessageToChat(userMessage, 'user');
+                chatInput.value = '';
+
+                try {
+                    const response = await fetch('/api/chat', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ message: userMessage })
+                    });
+                    const result = await response.json();
+                    if (response.ok) {
+                        addMessageToChat(result.response, 'ai');
+                    } else {
+                        addMessageToChat(`Error: ${result.details || result.error}`, 'ai-error');
+                    }
+                } catch (err) {
+                    addMessageToChat('Could not connect to the server.', 'ai-error');
+                }
+            });
+        }
+
+        function addMessageToChat(text, sender) {
+            const messageArea = document.getElementById('message-area');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'content';
+            contentDiv.textContent = text;
+            messageDiv.appendChild(contentDiv);
+            messageArea.appendChild(messageDiv);
+            messageArea.scrollTop = messageArea.scrollHeight;
+        }
+    </script>
+</body>
+</html>

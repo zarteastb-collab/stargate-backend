@@ -44,3 +44,12 @@ html, body {
 /* --- ICON ANIMATION --- */
 @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 .icon-spin { animation: spin 2s linear 1; }
+
+/* public/styles.css */
+/* ... All your existing styles ... */
+
+/* --- COMPONENT-SPECIFIC STYLES --- */
+/* ... existing component styles ... */
+.message.ai-error .content {
+    background-color: #5c2b29; /* Add a distinct error color */
+}
