@@ -132,10 +132,12 @@ app.get('/auth/google/callback',
     console.log('--- Successfully authenticated via Passport (redirecting to /) ---');
     if (req.user) {
       console.log('User object exists on req.user:', req.user.name);
+      // Ensure the redirect argument is explicitly a string
+      res.redirect('/'); 
     } else {
-      console.log('User object is NOT present on req.user after authentication.');
+      console.log('User object is NOT present on req.user after authentication. Redirecting to /');
+      res.redirect('/'); // Always redirect to a string path
     }
-    res.redirect('/');
   },
   (err, req, res, next) => { // Error handling middleware for this specific route
     console.error('--- General Error during /auth/google/callback processing ---');
