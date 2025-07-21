@@ -42,6 +42,9 @@ app.use(express.urlencoded({ extended: true }));
 // Serve static files (like index.html) from the 'public' directory
 app.use(express.static(path.join(__dirname, 'public')));
 
+// --- ADD THIS LINE ---
+// Also serve files from the node_modules directory
+app.use('/node_modules', express.static(path.join(__dirname, 'node_modules')));
 
 // --- TODO: Passport Configuration ---
 // The functions to tell Passport how to handle user data will go here.
