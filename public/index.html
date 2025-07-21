@@ -1,60 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Stargate Configuration</title>
-  <style>
-    body { font-family: sans-serif; background-color: #222; color: #eee; padding: 2em; }
-    h1 { color: #00aaff; }
-    .form-group { margin-bottom: 1em; }
-    label { display: block; margin-bottom: 0.5em; }
-    input, textarea { width: 300px; padding: 8px; border-radius: 4px; border: 1px solid #555; background-color: #333; color: #eee;}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyAI Interface</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>Configuration Dashboard</h1>
-  <p>Set your preferences for the Gemini interface below.</p>
-  
-  <form id="preferences-form">
-    <div class="form-group">
-      <label for="persona">Custom Persona:</label>
-      <textarea id="persona" name="persona" rows="4" placeholder="e.g., A helpful assistant who speaks like a pirate."></textarea>
-    </div>
-    <button type="submit">Save Preferences</button>
-  </form>
 
-<script>
-    const introScreen = document.getElementById('intro-screen');
-    const mainChat = document.getElementById('main-chat');
-    const showChatBtn = document.getElementById('show-chat-btn');
-    // ... other variables
+    <div class="app-container">
 
-    // --- UPDATED: Handle the Introductory Greeting ---
-    showChatBtn.addEventListener('click', async () => {
-      // 1. Gather browser info
-      const browserInfo = {
-        userAgent: navigator.userAgent,
-        language: navigator.language,
-        screenWidth: window.screen.width,
-        screenHeight: window.screen.height,
-      };
+        <nav class="left-nav">
+            <div class="widget-selector">
+                <button data-widget="file-tree-widget" class="active" title="File Tree">📁</button>
+                <button data-widget="search-widget" title="Search">🔍</button>
+                <button data-widget="calendar-widget" title="Calendar">📅</button>
+                <button data-widget="mail-widget" title="Mail">✉️</button>
+                <button data-widget="drive-widget" title="Drive">💾</button>
+            </div>
 
-      // 2. Send this info to the server to set a base persona
-      await fetch('/api/set-base-persona', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(browserInfo),
-      });
+            <div class="widget-container">
+                <div id="file-tree-widget" class="widget active">
+                    <input type="search" placeholder="Search files...">
+                    <div id="file-tree-content" class="file-tree">
+                        </div>
+                </div>
 
-      // 3. Show the chat interface
-      introScreen.style.display = 'none';
-      mainChat.style.display = 'flex';
-      addMessageToChat("Ok, here it is:", 'ai');
-    });
+                <div id="search-widget" class="widget">
+                    <input type="search" placeholder="Deep search...">
+                    <div id="search-results-content">
+                        </div>
+                </div>
 
-    // ... rest of the script (chatForm handler, addMessageToChat function)
-  </script>
+                <div id="calendar-widget" class="widget">
+                    <h4>Calendar</h4>
+                    <p>Your upcoming events.</p>
+                </div>
 
-</body>
-</html>
+                <div id="mail-widget" class="widget">
+                    <h4>Mail</h4>
+                    <p>Your latest emails.</p>
+                </div>
+
+                <div id="drive-widget" class="widget">
+                    <h4>Drive</h4>
+                    <p>Your cloud files.</p>
+                </div>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            
+            <div class="intro-screen" id="intro-screen">
+                <p>I've taken the liberty to customize your AI Interface based on your user profile, browser, and device information. I've created a view that I think you'll find pleasing.</p>
+                <p>Would you like to see it now?</p>
