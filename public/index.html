@@ -12,79 +12,30 @@
 
     <div id="grid-container">
         <div id="left-col" class="split drop-zone">
-            <div id="pane-3" class="component draggable">
-                <div class="component-header">3</div>
-                <div id="user-profile-content" class="component-content"></div>
-            </div>
-            <div id="pane-6" class="component draggable">
-                <div class="component-header">6</div>
-                <div class="component-content">File Tree...</div>
-            </div>
-            <div id="pane-7" class="component draggable">
-                 <div class="component-header">7</div>
-                 <div class="component-content">Library/Vault...</div>
-            </div>
+            <div id="pane-3" class="component draggable"><div class="component-header">3</div><div id="user-profile-content" class="component-content"></div></div>
+            <div id="pane-6" class="component draggable"><div class="component-header">6</div><div class="component-content">File Tree...</div></div>
+            <div id="pane-7" class="component draggable"><div class="component-header">7</div><div class="component-content">Library/Vault...</div></div>
         </div>
 
         <div id="center-col" class="split drop-zone">
-             <div id="pane-4" class="component draggable">
-                <div class="component-header">4</div>
-                <div class="component-content menu-bar">
-                    <a href="#">File</a>
-                    <a href="#">Edit</a>
-                    <button id="open-settings-btn">Settings</button>
-                </div>
-             </div>
-             <div id="pane-8" class="component draggable">
-                <div class="component-header">8</div>
-                <div class="component-content chat-area" id="message-area"></div>
-             </div>
-             <div id="pane-0" class="component draggable">
-                <div class="component-header">0</div>
-                <div class="component-content input-area">
-                    <form id="chat-form">
-                        <input type="text" id="chat-input" placeholder="Enter a prompt here" autocomplete="off">
-                        <button type="submit">→</button>
-                    </form>
-                </div>
-             </div>
+             <div id="pane-4" class="component draggable"><div class="component-header">4</div><div class="component-content menu-bar"><button id="open-settings-btn">Settings</button></div></div>
+             <div id="pane-8" class="component draggable"><div class="component-header">8</div><div class="component-content chat-area" id="message-area"></div></div>
+             <div id="pane-0" class="component draggable"><div class="component-header">0</div><div class="component-content input-area"><form id="chat-form"><input type="text" id="chat-input" placeholder="Enter a prompt" autocomplete="off"><button type="submit">→</button></form></div></div>
         </div>
 
         <div id="right-col" class="split drop-zone">
-             <div id="pane-5" class="component draggable">
-                 <div class="component-header">5</div>
-                 <div class="component-content">AI Profile...</div>
-            </div>
-            <div id="pane-1" class="component draggable">
-                <div class="component-header">1</div>
-                <div class="component-content">Participants...</div>
-            </div>
-            <div id="pane-2" class="component draggable">
-                <div class="component-header">2</div>
-                <div class="component-content">Event Log...</div>
-            </div>
+            <div id="pane-5" class="component draggable"><div class="component-header">5</div><div class="component-content">AI Profile...</div></div>
+            <div id="pane-1" class="component draggable"><div class="component-header">1</div><div class="component-content">Participants...</div></div>
+            <div id="pane-2" class="component draggable"><div class="component-header">2</div><div class="component-content">Event Log...</div></div>
         </div>
     </div>
 
     <div id="settings-modal" class="modal-overlay">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Interface Settings</h2>
-                <button id="close-settings-btn" class="close-btn">×</button>
-            </div>
+        <div class="modal-content"><div class="modal-header"><h2>Interface Settings</h2><button id="close-settings-btn" class="close-btn">×</button></div>
             <div class="settings-grid">
-                <div class="setting-item">
-                    <label for="font-size-input">Font Size (px)</label>
-                    <input type="number" id="font-size-input" value="14" min="10" max="24">
-                </div>
-                <div class="setting-item">
-                    <label for="color-input">Text Color</label>
-                    <input type="color" id="color-input" value="#e3e3e3">
-                </div>
-                <div class="setting-item">
-                    <label for="spin-toggle">Spinning Icon (on header 3)</label>
-                    <input type="checkbox" id="spin-toggle" class="toggle-switch">
-                </div>
+                <div class="setting-item"><label for="font-size-input">Font Size (px)</label><input type="number" id="font-size-input" value="14" min="10" max="24"></div>
+                <div class="setting-item"><label for="color-input">Text Color</label><input type="color" id="color-input" value="#e3e3e3"></div>
+                <div class="setting-item"><label for="spin-toggle">Spinning Icon (Header 3)</label><input type="checkbox" id="spin-toggle" class="toggle-switch"></div>
             </div>
         </div>
     </div>
@@ -92,20 +43,10 @@
     <script src="/node_modules/split.js/dist/split.min.js"></script>
     <script src="/node_modules/sortablejs/Sortable.min.js"></script>
     <script>
-        // --- INITIALIZE SPLIT LAYOUT & DRAG-AND-DROP ---
-        Split(['#left-col', '#center-col', '#right-col'], { sizes: [25, 50, 25], minSize: 200 });
-        Split(['#pane-3', '#pane-6', '#pane-7'], { direction: 'vertical', sizes: [40, 30, 30], minSize: 60 });
-        Split(['#pane-4', '#pane-8', '#pane-0'], { direction: 'vertical', sizes: [15, 70, 15], minSize: 60 });
-        Split(['#pane-5', '#pane-1', '#pane-2'], { direction: 'vertical', sizes: [33, 34, 33], minSize: 60 });
-        
-        document.querySelectorAll('.drop-zone').forEach(zone => {
-            new Sortable(zone, { group: 'shared', animation: 150, handle: '.component-header', ghostClass: 'blue-background-ghost' });
-        });
-
-        // --- AUTHENTICATION & UI SETUP ---
         document.addEventListener('DOMContentLoaded', async () => {
             const authScreen = document.getElementById('auth-screen');
             const gridContainer = document.getElementById('grid-container');
+
             try {
                 const response = await fetch('/api/get-user');
                 const data = await response.json();
@@ -113,11 +54,9 @@
                 if (data.user) {
                     authScreen.style.display = 'none';
                     gridContainer.style.display = 'flex';
-                    renderUserProfile(data.user);
                     
-                    // --- THE FIX: CALL THE SETUP FUNCTIONS ---
-                    setupChat();
-                    setupSettings();
+                    // --- THE FIX: ALL INITIALIZATION HAPPENS AFTER LOGIN & DOM IS READY ---
+                    initializeApp(data.user);
 
                 } else {
                     authScreen.style.display = 'flex';
@@ -129,6 +68,25 @@
                 authScreen.innerHTML = "<h2>Error loading application.</h2>";
             }
         });
+
+        function initializeApp(user) {
+            // 1. Render user-specific content
+            renderUserProfile(user);
+
+            // 2. Initialize layouts
+            Split(['#left-col', '#center-col', '#right-col'], { sizes: [25, 50, 25], minSize: 200 });
+            Split(['#pane-3', '#pane-6', '#pane-7'], { direction: 'vertical', sizes: [40, 30, 30], minSize: 60 });
+            Split(['#pane-4', '#pane-8', '#pane-0'], { direction: 'vertical', sizes: [15, 70, 15], minSize: 60 });
+            Split(['#pane-5', '#pane-1', '#pane-2'], { direction: 'vertical', sizes: [33, 34, 33], minSize: 60 });
+            
+            document.querySelectorAll('.drop-zone').forEach(zone => {
+                new Sortable(zone, { group: 'shared', animation: 150, handle: '.component-header', ghostClass: 'blue-background-ghost' });
+            });
+
+            // 3. Setup interactive components
+            setupChat();
+            setupSettings();
+        }
         
         function renderUserProfile(user) {
             document.getElementById('user-profile-content').innerHTML = `
@@ -140,7 +98,6 @@
                 </div>`;
         }
         
-        // --- SETTINGS MODAL FUNCTIONALITY ---
         function setupSettings() {
             const settingsModal = document.getElementById('settings-modal');
             const openBtn = document.getElementById('open-settings-btn');
@@ -151,4 +108,47 @@
             const gridContainer = document.getElementById('grid-container');
 
             openBtn.addEventListener('click', () => settingsModal.style.display = 'flex');
-            closeBtn.addEventListener('click', () =>
+            closeBtn.addEventListener('click', () => settingsModal.style.display = 'none');
+            
+            fontSizeInput.addEventListener('input', (e) => gridContainer.style.fontSize = \`\${e.target.value}px\`);
+            colorInput.addEventListener('input', (e) => gridContainer.style.color = e.target.value);
+
+            spinToggle.addEventListener('change', (e) => {
+                document.querySelector('#pane-3 .component-header').classList.toggle('icon-spin', e.target.checked);
+            });
+        }
+
+        function setupChat() {
+            const chatForm = document.getElementById('chat-form');
+            const chatInput = document.getElementById('chat-input');
+            const messageArea = document.getElementById('message-area');
+
+            chatForm.addEventListener('submit', async (event) => {
+                event.preventDefault();
+                const userMessage = chatInput.value.trim();
+                if (!userMessage) return;
+                addMessageToChat(userMessage, 'user');
+                chatInput.value = '';
+                const response = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: userMessage })
+                });
+                const result = await response.json();
+                addMessageToChat(result.response, 'ai');
+            });
+
+            function addMessageToChat(text, sender) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `message \${sender}`;
+                const contentDiv = document.createElement('div');
+                contentDiv.className = 'content';
+                contentDiv.textContent = text;
+                messageDiv.appendChild(contentDiv);
+                messageArea.appendChild(messageDiv);
+                messageArea.scrollTop = messageArea.scrollHeight;
+            }
+        }
+    </script>
+</body>
+</html>
