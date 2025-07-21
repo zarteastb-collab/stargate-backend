@@ -70,6 +70,9 @@ app.get('/auth/google',
 app.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/' }),
   (req, res) => {
+    // --- DEBUGGING LOGS ADDED HERE ---
+    console.log('Successfully authenticated! User:', req.user.name);
+    console.log('Redirecting to /');
     res.redirect('/');
   }
 );
