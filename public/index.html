@@ -8,49 +8,25 @@
 </head>
 <body>
 
-    <div class="app-container">
-
-        <nav class="left-nav">
-            <div class="widget-selector">
-                <button data-widget="file-tree-widget" class="active" title="File Tree">📁</button>
-                <button data-widget="search-widget" title="Search">🔍</button>
-                <button data-widget="calendar-widget" title="Calendar">📅</button>
-                <button data-widget="mail-widget" title="Mail">✉️</button>
-                <button data-widget="drive-widget" title="Drive">💾</button>
+    <div id="app-container">
+        <div id="left-pane" class="pane">
+            <h2>Navigation</h2>
             </div>
 
-            <div class="widget-container">
-                <div id="file-tree-widget" class="widget active">
-                    <input type="search" placeholder="Search files...">
-                    <div id="file-tree-content" class="file-tree">
-                        </div>
-                </div>
-
-                <div id="search-widget" class="widget">
-                    <input type="search" placeholder="Deep search...">
-                    <div id="search-results-content">
-                        </div>
-                </div>
-
-                <div id="calendar-widget" class="widget">
-                    <h4>Calendar</h4>
-                    <p>Your upcoming events.</p>
-                </div>
-
-                <div id="mail-widget" class="widget">
-                    <h4>Mail</h4>
-                    <p>Your latest emails.</p>
-                </div>
-
-                <div id="drive-widget" class="widget">
-                    <h4>Drive</h4>
-                    <p>Your cloud files.</p>
-                </div>
+        <div id="main-pane" class="pane">
+            <h2>Main Content</h2>
             </div>
-        </nav>
+    </div>
 
-        <main class="main-content">
-            
-            <div class="intro-screen" id="intro-screen">
-                <p>I've taken the liberty to customize your AI Interface based on your user profile, browser, and device information. I've created a view that I think you'll find pleasing.</p>
-                <p>Would you like to see it now?</p>
+    <script src="/node_modules/split.js/dist/split.min.js"></script>
+    <script>
+        Split(['#left-pane', '#main-pane'], {
+            sizes: [20, 80], // Initial sizes in percentage
+            minSize: [200, 400], // Minimum size in pixels
+            gutterSize: 8,
+            cursor: 'col-resize',
+        });
+    </script>
+
+</body>
+</html>
