@@ -5,6 +5,7 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
+    "prestart": "kill $(lsof -t -i:3001) || true && pkill -f 'node server.js' || true && pkill -f 'node /workspaces/stargate-backend/server.js' || true && npm install && npm audit fix --force",
     "start": "node server.js",
     "dev": "nodemon server.js"
   },
