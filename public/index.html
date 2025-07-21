@@ -15,7 +15,7 @@
 <body>
   <h1>Configuration Dashboard</h1>
   <p>Set your preferences for the Gemini interface below.</p>
-
+  
   <form id="preferences-form">
     <div class="form-group">
       <label for="persona">Custom Persona:</label>
@@ -23,6 +23,27 @@
     </div>
     <button type="submit">Save Preferences</button>
   </form>
+
+  <script>
+    const form = document.getElementById('preferences-form');
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault(); // Stop the browser from reloading the page
+
+      const persona = document.getElementById('persona').value;
+      
+      const response = await fetch('/api/save-preferences', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ persona: persona }),
+      });
+
+      const result = await response.json();
+      alert(result.message); // Show a confirmation pop-up
+    });
+  </script>
 
 </body>
 </html>

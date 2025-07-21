@@ -5,33 +5,22 @@ import genAI from '../services/googleai.js';
 
 const router = Router();
 
+// This is your existing route for the AI chat
 router.post('/chat', async (req, res) => {
-  try {
-    if (!process.env.GOOGLE_API_KEY) {
-      throw new Error("GOOGLE_API_KEY is not set in the .env file.");
-    }
-
-    const { message } = req.body;
-    if (!message) {
-      return res.status(400).json({ error: 'Message is required' });
-    }
-
-    // UPDATED: Use a current model name
-    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash-latest' });
-
-    const result = await model.generateContent(message);
-    const response = await result.response;
-    const text = response.text();
-
-    res.json({ response: text });
-
-  } catch (error) {
-    console.error('Error with Google AI API:', error);
-    res.status(500).json({
-      error: 'Failed to get response from Google AI',
-      details: error.message 
-    });
-  }
+  // ... existing chat logic
 });
+
+// --- ADD THIS NEW ROUTE ---
+// This route will receive the data from your HTML form
+router.post('/save-preferences', (req, res) => {
+  const { persona } = req.body;
+
+  // For now, we'll just log it to the server's console
+  console.log('Received persona:', persona);
+
+  // Send a confirmation message back to the frontend
+  res.json({ message: 'Preferences saved successfully!' });
+});
+// --- END NEW ROUTE ---
 
 export default router;
