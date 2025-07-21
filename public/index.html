@@ -24,25 +24,36 @@
     <button type="submit">Save Preferences</button>
   </form>
 
-  <script>
-    const form = document.getElementById('preferences-form');
+<script>
+    const introScreen = document.getElementById('intro-screen');
+    const mainChat = document.getElementById('main-chat');
+    const showChatBtn = document.getElementById('show-chat-btn');
+    // ... other variables
 
-    form.addEventListener('submit', async (event) => {
-      event.preventDefault(); // Stop the browser from reloading the page
+    // --- UPDATED: Handle the Introductory Greeting ---
+    showChatBtn.addEventListener('click', async () => {
+      // 1. Gather browser info
+      const browserInfo = {
+        userAgent: navigator.userAgent,
+        language: navigator.language,
+        screenWidth: window.screen.width,
+        screenHeight: window.screen.height,
+      };
 
-      const persona = document.getElementById('persona').value;
-      
-      const response = await fetch('/api/save-preferences', {
+      // 2. Send this info to the server to set a base persona
+      await fetch('/api/set-base-persona', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ persona: persona }),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(browserInfo),
       });
 
-      const result = await response.json();
-      alert(result.message); // Show a confirmation pop-up
+      // 3. Show the chat interface
+      introScreen.style.display = 'none';
+      mainChat.style.display = 'flex';
+      addMessageToChat("Ok, here it is:", 'ai');
     });
+
+    // ... rest of the script (chatForm handler, addMessageToChat function)
   </script>
 
 </body>
