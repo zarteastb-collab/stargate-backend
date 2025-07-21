@@ -5,18 +5,33 @@ import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import apiRouter from './routes/api.js';
-
-// Imports for Authentication
 import session from 'express-session';
 import passport from 'passport';
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 
+// Load environment variables
+dotenv.config();
+
+// --- NEW: Check for required environment variables ---
+const requiredEnvVars = ['GOOGLE_API_KEY', 'GOOGLE_CLIENT_ID', 'GOOGLE_CLIENT_SECRET', 'SESSION_SECRET'];
+for (const varName of requiredEnvVars) {
+  if (!process.env[varName]) {
+    console.error(`FATAL ERROR: Environment variable ${varName} is not set. Please check your .env file.`);
+    process.exit(1); // Exit with a failure code
+  }
+}
+
+// --- NEW: Catch any unhandled errors that cause silent crashes ---
+process.on('uncaughtException', (err, origin) => {
+  console.error('FATAL UNCAUGHT EXCEPTION:', err);
+  console.error('Exception origin:', origin);
+  process.exit(1);
+});
+
+
 // Setup for ES module __dirname
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
-// Load environment variables
-dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -70,7 +85,6 @@ app.get('/auth/google',
 app.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/' }),
   (req, res) => {
-    // --- DEBUGGING LOGS ADDED HERE ---
     console.log('Successfully authenticated! User:', req.user.name);
     console.log('Redirecting to /');
     res.redirect('/');
