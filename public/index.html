@@ -7,45 +7,14 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
     <div id="auth-screen"></div>
-
-    <div id="grid-container">
-        <div id="left-col" class="split drop-zone">
-            <div id="pane-3" class="component draggable"><div class="component-header">3</div><div id="user-profile-content" class="component-content"></div></div>
-            <div id="pane-6" class="component draggable"><div class="component-header">6</div><div class="component-content">File Tree...</div></div>
-            <div id="pane-7" class="component draggable"><div class="component-header">7</div><div class="component-content">Library/Vault...</div></div>
-        </div>
-
-        <div id="center-col" class="split drop-zone">
-             <div id="pane-4" class="component draggable"><div class="component-header">4</div><div class="component-content menu-bar"><button id="open-settings-btn">Settings</button></div></div>
-             <div id="pane-8" class="component draggable"><div class="component-header">8</div><div class="component-content chat-area" id="message-area"></div></div>
-             <div id="pane-0" class="component draggable"><div class="component-header">0</div><div class="component-content input-area"><form id="chat-form"><input type="text" id="chat-input" placeholder="Enter a prompt" autocomplete="off"><button type="submit">→</button></form></div></div>
-        </div>
-
-        <div id="right-col" class="split drop-zone">
-            <div id="pane-5" class="component draggable"><div class="component-header">5</div><div class="component-content">AI Profile...</div></div>
-            <div id="pane-1" class="component draggable"><div class="component-header">1</div><div class="component-content">Participants...</div></div>
-            <div id="pane-2" class="component draggable"><div class="component-header">2</div><div class="component-content">Event Log...</div></div>
-        </div>
-    </div>
-
-    <div id="settings-modal" class="modal-overlay">
-        <div class="modal-content"><div class="modal-header"><h2>Interface Settings</h2><button id="close-settings-btn" class="close-btn">×</button></div>
-            <div class="settings-grid">
-                <div class="setting-item"><label for="font-size-input">Font Size (px)</label><input type="number" id="font-size-input" value="14" min="10" max="24"></div>
-                <div class="setting-item"><label for="color-input">Text Color</label><input type="color" id="color-input" value="#e3e3e3"></div>
-                <div class="setting-item"><label for="spin-toggle">Spinning Icon (Header 3)</label><input type="checkbox" id="spin-toggle" class="toggle-switch"></div>
-            </div>
-        </div>
-    </div>
+    <div id="app-root"></div>
 
     <script src="/node_modules/split.js/dist/split.min.js"></script>
-    <script src="/node_modules/sortablejs/Sortable.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', async () => {
             const authScreen = document.getElementById('auth-screen');
-            const gridContainer = document.getElementById('grid-container');
+            const appRoot = document.getElementById('app-root');
 
             try {
                 const response = await fetch('/api/get-user');
@@ -53,11 +22,11 @@
 
                 if (data.user) {
                     authScreen.style.display = 'none';
-                    gridContainer.style.display = 'flex';
+                    appRoot.style.display = 'block';
                     initializeApp(data.user);
                 } else {
                     authScreen.style.display = 'flex';
-                    gridContainer.style.display = 'none';
+                    appRoot.style.display = 'none';
                     authScreen.innerHTML = '<h2>Welcome!</h2><a href="/auth/google" class="login-btn">Sign in with Google</a>';
                 }
             } catch (error) {
@@ -66,94 +35,59 @@
             }
         });
 
+        let paneCounter = 0; // To give each new pane a unique ID
+
         function initializeApp(user) {
-            renderUserProfile(user);
-
-            Split(['#left-col', '#center-col', '#right-col'], { sizes: [25, 50, 25], minSize: 200 });
-            Split(['#pane-3', '#pane-6', '#pane-7'], { direction: 'vertical', sizes: [40, 30, 30], minSize: 60 });
-            Split(['#pane-4', '#pane-8', '#pane-0'], { direction: 'vertical', sizes: [15, 70, 15], minSize: 60 });
-            Split(['#pane-5', '#pane-1', '#pane-2'], { direction: 'vertical', sizes: [33, 34, 33], minSize: 60 });
-            
-            document.querySelectorAll('.drop-zone').forEach(zone => {
-                new Sortable(zone, { group: 'shared', animation: 150, handle: '.component-header', ghostClass: 'blue-background-ghost' });
-            });
-
-            setupChat();
-            setupSettings();
-        }
-        
-        function renderUserProfile(user) {
-            document.getElementById('user-profile-content').innerHTML = `
-                <div class="user-profile-widget">
-                    <img src="${user.photo}" alt="User Avatar">
-                    <strong>${user.name}</strong>
-                    <span>${user.email}</span>
-                    <a href="/logout">Logout</a>
-                </div>`;
-        }
-        
-        function setupSettings() {
-            const settingsModal = document.getElementById('settings-modal');
-            const openBtn = document.getElementById('open-settings-btn');
-            const closeBtn = document.getElementById('close-settings-btn');
-            const fontSizeInput = document.getElementById('font-size-input');
-            const colorInput = document.getElementById('color-input');
-            const spinToggle = document.getElementById('spin-toggle');
-            const gridContainer = document.getElementById('grid-container');
-
-            openBtn.addEventListener('click', () => settingsModal.style.display = 'flex');
-            closeBtn.addEventListener('click', () => settingsModal.style.display = 'none');
-            
-            fontSizeInput.addEventListener('input', (e) => gridContainer.style.fontSize = `${e.target.value}px`);
-            colorInput.addEventListener('input', (e) => gridContainer.style.color = e.target.value);
-
-            spinToggle.addEventListener('change', (e) => {
-                document.querySelector('#pane-3 .component-header').classList.toggle('icon-spin', e.target.checked);
-            });
+            const appRoot = document.getElementById('app-root');
+            createGrid(appRoot); // Create the initial, top-level grid
         }
 
-        // --- FULLY IMPLEMENTED CHAT FUNCTIONALITY ---
-        function setupChat() {
-            const chatForm = document.getElementById('chat-form');
-            const chatInput = document.getElementById('chat-input');
-            const messageArea = document.getElementById('message-area');
+        // --- CORE FUNCTION FOR RECURSIVE GRID ---
+        function createGrid(container) {
+            container.innerHTML = ''; // Clear the container first
+            container.classList.add('grid-container');
 
-            chatForm.addEventListener('submit', async (event) => {
-                event.preventDefault();
-                const userMessage = chatInput.value.trim();
-                if (!userMessage) return;
+            const columns = ['left-col', 'center-col', 'right-col'];
+            const columnElements = [];
 
-                addMessageToChat(userMessage, 'user');
-                chatInput.value = '';
+            // Create 3 main columns
+            for (const colId of columns) {
+                const col = document.createElement('div');
+                col.id = `col-${paneCounter++}`;
+                col.className = 'split-col';
+                container.appendChild(col);
+                columnElements.push(`#${col.id}`);
 
-                try {
-                    const response = await fetch('/api/chat', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ message: userMessage })
-                    });
-                    const result = await response.json();
-                    if (response.ok) {
-                        addMessageToChat(result.response, 'ai');
-                    } else {
-                        addMessageToChat(`Error: ${result.details || result.error}`, 'ai-error');
-                    }
-                } catch (err) {
-                    addMessageToChat('Could not connect to the server.', 'ai-error');
+                const paneElements = [];
+                // Create 3 panes within each column
+                for (let i = 1; i <= 3; i++) {
+                    const pane = document.createElement('div');
+                    const paneId = `pane-${paneCounter++}`;
+                    pane.id = paneId;
+                    pane.className = 'split-pane';
+
+                    const header = document.createElement('div');
+                    header.className = 'pane-header';
+                    
+                    const label = document.createElement('span');
+                    label.textContent = 'Pane'; // Default label
+                    
+                    const subdivideBtn = document.createElement('button');
+                    subdivideBtn.textContent = '⊞';
+                    subdivideBtn.title = 'Subdivide this pane';
+                    subdivideBtn.onclick = () => createGrid(pane); // RECURSIVE CALL
+                    
+                    header.appendChild(label);
+                    header.appendChild(subdivideBtn);
+                    pane.appendChild(header);
+                    col.appendChild(pane);
+                    paneElements.push(`#${paneId}`);
                 }
-            });
-        }
-
-        function addMessageToChat(text, sender) {
-            const messageArea = document.getElementById('message-area');
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `message ${sender}`;
-            const contentDiv = document.createElement('div');
-            contentDiv.className = 'content';
-            contentDiv.textContent = text;
-            messageDiv.appendChild(contentDiv);
-            messageArea.appendChild(messageDiv);
-            messageArea.scrollTop = messageArea.scrollHeight;
+                 // Make the panes in the column resizable
+                Split(paneElements, { direction: 'vertical', gutterSize: 8, minSize: 50 });
+            }
+            // Make the columns resizable
+            Split(columnElements, { gutterSize: 8, minSize: 200 });
         }
     </script>
 </body>

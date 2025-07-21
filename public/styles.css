@@ -1,55 +1,78 @@
 /* public/styles.css */
-html, body {
-    height: 100%; margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    background-color: #131314; color: #e3e3e3; overflow: hidden; font-size: 14px;
+html, body, #app-root {
+    height: 100%;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background-color: #131314;
+    color: #e3e3e3;
+    overflow: hidden;
 }
 * { box-sizing: border-box; }
 
-/* --- AUTH & GRID & PANE STYLES --- */
-#auth-screen { display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; text-align: center; }
-.login-btn { display: inline-block; padding: 12px 24px; background-color: #4285F4; color: white; text-decoration: none; border-radius: 4px; font-weight: bold; margin-top: 20px; }
-#grid-container { display: none; height: 100vh; width: 100vw; }
-.split { display: flex; flex-direction: column; }
-.component { border: 1px solid #333; border-radius: 8px; margin-bottom: 8px; background-color: #1e1f20; display: flex; flex-direction: column; overflow: hidden; }
-.component-header { background-color: #2a2a2d; padding: 6px 12px; font-weight: bold; cursor: grab; border-bottom: 1px solid #333; font-size: 12px; color: #aaa; }
-.component-content { padding: 12px; flex-grow: 1; overflow: auto; }
-.gutter { background-color: #333; }
+/* --- AUTH SCREEN --- */
+#auth-screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+}
+.login-btn {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #4285F4;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+/* --- RECURSIVE GRID & PANE STYLES --- */
+.grid-container {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+.split-col {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.split-pane {
+    background-color: #1e1f20;
+    border: 1px solid #333;
+    border-radius: 4px;
+    margin: 4px;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+}
+.pane-header {
+    background-color: #2a2a2d;
+    padding: 4px 8px;
+    font-size: 12px;
+    color: #aaa;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 28px;
+}
+.pane-header button {
+    background: none;
+    border: 1px solid #555;
+    color: #aaa;
+    cursor: pointer;
+    border-radius: 4px;
+    padding: 2px 6px;
+}
+.pane-header button:hover {
+    background-color: #3a3d40;
+}
+.gutter {
+    background-color: #333;
+    z-index: 10;
+}
 .gutter.gutter-vertical { cursor: col-resize; }
 .gutter.gutter-horizontal { cursor: row-resize; }
-.blue-background-ghost { background: #2c3e50; }
-
-/* --- COMPONENT-SPECIFIC STYLES --- */
-.user-profile-widget { align-items: center; text-align: center; gap: 8px; }
-.user-profile-widget img { width: 48px; height: 48px; border-radius: 50%; }
-.menu-bar { display: flex; align-items: center; gap: 10px; }
-.menu-bar a, .menu-bar button { color: #bbb; text-decoration: none; font-size: 14px; background: none; border: 1px solid transparent; cursor: pointer; padding: 6px 10px; border-radius: 6px; }
-.menu-bar a:hover, .menu-bar button:hover { background-color: #2a2a2d; }
-.chat-area, .input-area { padding: 0 !important; }
-
-/* --- SETTINGS MODAL --- */
-.modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.7); justify-content: center; align-items: center; z-index: 100; }
-.modal-content { background-color: #2a2a2d; padding: 25px; border-radius: 8px; width: 100%; max-width: 500px; border: 1px solid #444; }
-.modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-.modal-header h2 { margin: 0; }
-.close-btn { background: none; border: none; font-size: 24px; color: #aaa; cursor: pointer; }
-.settings-grid { display: grid; gap: 15px; }
-.setting-item { display: flex; justify-content: space-between; align-items: center; background-color: #1e1f20; padding: 10px; border-radius: 6px; }
-.setting-item label { font-weight: bold; }
-.setting-item input[type="number"], .setting-item input[type="color"] { background-color: #333; border: 1px solid #555; color: #eee; border-radius: 4px; padding: 5px; }
-.toggle-switch { appearance: none; width: 40px; height: 22px; background-color: #555; border-radius: 11px; position: relative; cursor: pointer; }
-.toggle-switch::before { content: ''; position: absolute; width: 18px; height: 18px; border-radius: 50%; background-color: white; top: 2px; left: 2px; transition: 0.2s; }
-.toggle-switch:checked { background-color: #4285F4; }
-.toggle-switch:checked::before { transform: translateX(18px); }
-
-/* --- ICON ANIMATION --- */
-@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-.icon-spin { animation: spin 2s linear 1; }
-
-/* public/styles.css */
-/* ... All your existing styles ... */
-
-/* --- COMPONENT-SPECIFIC STYLES --- */
-/* ... existing component styles ... */
-.message.ai-error .content {
-    background-color: #5c2b29; /* Add a distinct error color */
-}
