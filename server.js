@@ -18,60 +18,69 @@ const __dirname = path.dirname(__filename);
 // Load environment variables
 dotenv.config();
 
-// --- Main Correction: Create the app variable before using it ---
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// --- Middleware Setup ---
+// In-memory user database (for demonstration purposes)
+const users = {};
 
-// Session middleware
+// --- Middleware Setup ---
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
+  cookie: { secure: false } // In production, use 'auto' or true with HTTPS
 }));
-
-// Passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
-
-// JSON and URL-encoded body parsers
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Serve static files (like index.html) from the 'public' directory
+// Serve static files from 'public' and 'node_modules'
 app.use(express.static(path.join(__dirname, 'public')));
-
-// --- ADD THIS LINE ---
-// Also serve files from the node_modules directory
 app.use('/node_modules', express.static(path.join(__dirname, 'node_modules')));
 
-// --- TODO: Passport Configuration ---
-// The functions to tell Passport how to handle user data will go here.
-// TODO: Add passport.serializeUser and passport.deserializeUser
-// TODO: Configure the GoogleStrategy for Passport
+
+// --- Passport.js Configuration ---
+passport.use(new GoogleStrategy({
+    clientID: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    callbackURL: "/auth/google/callback"
+  },
+  (accessToken, refreshToken, profile, done) => {
+    console.log("Google profile received:", profile);
+    users[profile.id] = { id: profile.id, name: profile.displayName, email: profile.emails[0].value, photo: profile.photos[0].value };
+    return done(null, users[profile.id]);
+  }
+));
+
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+
+passport.deserializeUser((id, done) => {
+  done(null, users[id]);
+});
 
 
 // --- Routes ---
-
-// Root route to serve the dashboard page
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
-
-// Authentication routes
 app.get('/auth/google',
   passport.authenticate('google', { scope: ['profile', 'email'] }));
 
 app.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/' }),
   (req, res) => {
-    // Successful authentication, redirect to the main page.
     res.redirect('/');
   }
 );
 
-// API routes from routes/api.js
+app.get('/logout', (req, res, next) => {
+    req.logout(err => {
+        if (err) { return next(err); }
+        res.redirect('/');
+    });
+});
+
 app.use('/api', apiRouter);
 
 
